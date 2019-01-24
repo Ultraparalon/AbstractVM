@@ -18,19 +18,28 @@ Parser::Parser()
 	_commands["pop"] = new CmdPop;
 	_commands["dump"] = new CmdDump;
 	_commands["assert"] = new CmdAssert;
-	_commands["add"] = new CmdAdd;
-	_commands["sub"] = new CmdSub;
-	_commands["mul"] = new CmdMul;
-	_commands["div"] = new CmdDiv;
-	_commands["mod"] = new CmdMod;
+	_commands["add"] = new CmdMath;
+	_commands["sub"] = new CmdMath;
+	_commands["mul"] = new CmdMath;
+	_commands["div"] = new CmdMath;
+	_commands["mod"] = new CmdMath;
+	_commands["max"] = new CmdMax;
+	_commands["min"] = new CmdMin;
 	_commands["print"] = new CmdPrint;
 	_commands["exit"] = new CmdExit;
 }
 Parser::Parser(Parser const &) {}
 Parser::~Parser()
 {
-	for (std::map<std::string, ICommand *>::iterator it = _commands.begin(); it != _commands.end(); it++)
-		delete it->second;
+	for (std::map<std::string, ICommand *>::iterator it = _commands.begin();
+			it != _commands.end(); it++)
+	{
+		if (it->second)
+		{
+			delete it->second;
+			it->second = NULL;
+		}
+	}
 }
 
 Parser &	Parser::operator=(Parser const &)
@@ -38,14 +47,7 @@ Parser &	Parser::operator=(Parser const &)
 	return *this;
 }
 
-void	Parser::operate(std::vector<std::string> & vec, std::stack<const IOperand *> & operands, OpFactory & factory)
+ICommand *	Parser::operate(std::string const & cmd)
 {
-	try
-	{
-		_commands.at(vec.at(0))->execute(operands, vec, factory);
-	}
-	catch (std::exception & e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+	return _commands.at(cmd);
 }

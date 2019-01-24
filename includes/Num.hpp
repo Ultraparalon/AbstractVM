@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   CmdMul.hpp                                         :+:      :+:    :+:   */
+/*   Num.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkaidans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/10 14:39:06 by vkaidans          #+#    #+#             */
-/*   Updated: 2019/01/10 14:39:08 by vkaidans         ###   ########.fr       */
+/*   Created: 2019/01/23 15:13:38 by vkaidans          #+#    #+#             */
+/*   Updated: 2019/01/23 15:13:39 by vkaidans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "ICommand.hpp"
+#include <string>
 
-class CmdMul : public ICommand
+class Num
 {
 public:
-	CmdMul();
-	CmdMul(CmdMul const &);
-	~CmdMul();
+	Num();
+	Num(Num const &);
+	~Num();
 
-	CmdMul &	operator=(CmdMul const &);
+	Num &	operator=(Num const &);
 
-	void	execute(std::stack<const IOperand *> &, std::vector<std::string> &, OpFactory &);
+	void	check(std::string const &);
 
-	class EmptyStackException
+	class NumException : public std::exception
 	{
 	public:
-		EmptyStackException() throw();
-		EmptyStackException(EmptyStackException const &) throw();
-		virtual ~EmptyStackException() throw();
+		NumException() throw();
+		NumException(NumException const &) throw();
+		virtual ~NumException() throw();
 		virtual const char*	what() const throw();
-		EmptyStackException &	operator=(EmptyStackException const &) throw();
-	};
+		NumException &	operator=(NumException const &) throw();
+	};	
 };

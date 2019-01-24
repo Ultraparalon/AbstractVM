@@ -24,61 +24,44 @@ CmdPrint &	CmdPrint::operator=(CmdPrint const &)
 	return *this;
 }
 
-void	CmdPrint::execute(std::stack<const IOperand *> & oper, std::vector<std::string> & vec, OpFactory & factory)
+void	CmdPrint::execute(std::stack<const IOperand *> & oper,
+	std::vector<std::string> & vec, OpFactory &)
 {
-	(void)vec;
-	(void)factory;
-
-	try
+	if (vec.size() != 1)
 	{
-		if (oper.empty())
-			throw EmptyStackException();
-
-		if (oper.top()->getType() != INT8)
-			throw WrongTypeException();
-		else
-			std::cout << oper.top()->toString() << std::endl;
+		throw PrintException("Wrong amount of arguments");
 	}
-	catch (CmdPrint::EmptyStackException & e)
+
+	if (oper.empty())
 	{
-		std::cout << "Error: " << e.what() << std::endl;
+		throw PrintException("Empty stack");
 	}
-	catch (CmdPrint::WrongTypeException & e)
+
+	if (oper.top()->getType() != INT8)
 	{
-		std::cout << "Error: " << e.what() << std::endl;
+		throw PrintException("Wrong type");
+	}
+	else
+	{
+		std::cout << static_cast<char>(std::stoi(oper.top()->toString()))
+			<< std::endl;
 	}
 }
 
-//EmptyStackException---------------------------------------------------
+//PrintException---------------------------------------------------
 
-CmdPrint::EmptyStackException::EmptyStackException() throw() {}
-CmdPrint::EmptyStackException::EmptyStackException(EmptyStackException const & obj) throw()
+CmdPrint::PrintException::PrintException() throw() : err("Error") {}
+CmdPrint::PrintException::PrintException(std::string str) throw() : err(str) {}
+CmdPrint::PrintException::PrintException(PrintException const & obj) throw()
 {
 	*this = obj;
 }
-CmdPrint::EmptyStackException::~EmptyStackException() throw() {}
-const char *	CmdPrint::EmptyStackException::what() const throw()
+CmdPrint::PrintException::~PrintException() throw() {}
+const char *	CmdPrint::PrintException::what() const throw()
 {
-	return "Stack is empty.";
+	return err.c_str();
 }
-CmdPrint::EmptyStackException &	CmdPrint::EmptyStackException::operator=(EmptyStackException const &) throw()
-{
-	return *this;
-}
-
-//WrongTypeException---------------------------------------------------
-
-CmdPrint::WrongTypeException::WrongTypeException() throw() {}
-CmdPrint::WrongTypeException::WrongTypeException(WrongTypeException const & obj) throw()
-{
-	*this = obj;
-}
-CmdPrint::WrongTypeException::~WrongTypeException() throw() {}
-const char *	CmdPrint::WrongTypeException::what() const throw()
-{
-	return "Wrong type.";
-}
-CmdPrint::WrongTypeException &	CmdPrint::WrongTypeException::operator=(WrongTypeException const &) throw()
+CmdPrint::PrintException &	CmdPrint::PrintException::operator=(PrintException const &) throw()
 {
 	return *this;
 }

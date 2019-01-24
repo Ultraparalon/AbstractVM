@@ -18,18 +18,18 @@ Lexer::~Lexer() {}
 
 std::vector<std::string>	Lexer::explode(std::string const & str)
 {
-	std::string					buff;
-	std::vector<std::string>	vec;
+	std::string buff;
+	std::vector<std::string> vec;
 
 	for (auto n:str)
 	{
-		if (n != ' ' && n != '(' && n != ')')
-			buff += n;
-		else if ((n == ' ' || n == '(' || n == ')') && buff != "")
+		if ((n == ' ' || n == '(' || n == ')') && buff.length())
 		{
 			vec.push_back(buff);
 			buff = "";
 		}
+		else if (n != ' ' && n != '(' && n != ')')
+			buff += n;
 	}
 	if (buff != "")
 		vec.push_back(buff);

@@ -22,7 +22,8 @@
 class ICommand
 {
 public:
-	virtual void	execute(std::stack<const IOperand *> &, std::vector<std::string> &, OpFactory &) = 0;
+	virtual void	execute(std::stack<const IOperand *> &,
+		std::vector<std::string> &, OpFactory &) = 0;
 
 	virtual ~ICommand() {};	
 };

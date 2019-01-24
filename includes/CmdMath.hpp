@@ -1,37 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   CmdAdd.hpp                                         :+:      :+:    :+:   */
+/*   CmdMath.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkaidans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/10 14:38:34 by vkaidans          #+#    #+#             */
-/*   Updated: 2019/01/10 14:38:37 by vkaidans         ###   ########.fr       */
+/*   Created: 2019/01/21 21:33:48 by vkaidans          #+#    #+#             */
+/*   Updated: 2019/01/21 21:33:50 by vkaidans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include "ICommand.hpp"
+#include "Poper.hpp"
 
-class CmdAdd : public ICommand
+class CmdMath : public ICommand
 {
+	Poper poper;
+	
 public:
-	CmdAdd();
-	CmdAdd(CmdAdd const &);
-	~CmdAdd();
+	CmdMath();
+	CmdMath(CmdMath const &);
+	~CmdMath();
 
-	CmdAdd &	operator=(CmdAdd const &);
+	CmdMath &	operator=(CmdMath const &);
 
 	void	execute(std::stack<const IOperand *> &, std::vector<std::string> &, OpFactory &);
 
-	class EmptyStackException
+	class MathException : public std::exception
 	{
+		std::string err;
+
 	public:
-		EmptyStackException() throw();
-		EmptyStackException(EmptyStackException const &) throw();
-		virtual ~EmptyStackException() throw();
+		MathException() throw();
+		MathException(std::string) throw();
+		MathException(MathException const &) throw();
+		virtual ~MathException() throw();
 		virtual const char*	what() const throw();
-		EmptyStackException &	operator=(EmptyStackException const &) throw();
+		MathException &	operator=(MathException const &) throw();
 	};
 };

@@ -16,8 +16,6 @@
 
 int	main(int argc, char ** argv)
 {
-	(void)argc;
-	(void)argv;
 	VirtualMachine vm;
 
 	if (argc == 2)
@@ -30,7 +28,7 @@ int	main(int argc, char ** argv)
 		}
 		else
 		{
-			std::cerr << "file don't exist\n";
+			std::cerr << "Error: File don't exist\n";
 		}
 	}
 	else
@@ -38,19 +36,6 @@ int	main(int argc, char ** argv)
 		vm.engine(std::cin);
 	}
 
-	// stack stack;
-
-	// while (input == true)
-	// {
-	// 	if push int8 - double
-	// 		stack += add new operand
-	// 	if math
-	// 		do math
-	// 	if dump
-	// 		show_stack()
-	// 	if assert
-
-	// }
-	system("leaks avm");
+	// system("leaks avm");
 	return (0);
 }

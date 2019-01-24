@@ -30,7 +30,6 @@ public:
 	}
 	Operand(T val, eOperandType type, const OpFactory * factory) : _oper(val), _type(type),  _factory(factory)
 	{
-		std::cout << "got new val: " << val << std::endl;
 		_str = std::to_string(val);
 	}
 	Operand(Operand const & obj)	{	*this = obj;	}
@@ -94,8 +93,6 @@ public:
 
 	IOperand const *	operator%(IOperand const & obj) const
 	{
-		if (obj.getType() > INT32)
-			throw FloatPointException();
 		if (this->getPrecision() > obj.getPrecision())
 		{
 			return _factory->createOperand(this->getType(),
@@ -122,23 +119,4 @@ public:
 	{
 		return _str;
 	}
-
-	class FloatPointException
-	{
-	public:
-		FloatPointException() throw() {}
-		FloatPointException(FloatPointException const & obj) throw()
-		{
-			*this = obj;
-		}
-		virtual ~FloatPointException() throw() {}
-		virtual const char*	what() const throw()
-		{
-			return "Floating point exception.";
-		}
-		FloatPointException &	operator=(FloatPointException const &) throw()
-		{
-			return *this;
-		}
-	};
 };

@@ -13,9 +13,14 @@
 #pragma once
 
 #include "ICommand.hpp"
+#include "Typer.hpp"
+#include "Num.hpp"
 
 class CmdPush : public ICommand
 {
+	Typer typer;
+	Num num;
+
 public:
 	CmdPush();
 	CmdPush(CmdPush const &);
@@ -24,4 +29,14 @@ public:
 	CmdPush &	operator=(CmdPush const &);
 
 	void	execute(std::stack<const IOperand *> &, std::vector<std::string> &, OpFactory &);
+
+	class WrongSizeException : public std::exception
+	{
+	public:
+		WrongSizeException() throw();
+		WrongSizeException(WrongSizeException const &) throw();
+		virtual ~WrongSizeException() throw();
+		virtual const char*	what() const throw();
+		WrongSizeException &	operator=(WrongSizeException const &) throw();
+	};
 };

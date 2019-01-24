@@ -21,11 +21,17 @@ VirtualMachine &	VirtualMachine::operator=(VirtualMachine const &)
 	return *this;
 }
 
+static void	comment(std::string & str)
+{
+	if (str.find(";") != std::string::npos)
+	{
+		str.resize(str.find(";"));
+	}
+}
+
 void	VirtualMachine::engine(std::istream & stream)
 {
 	std::string					buff;
-	Lexer						lexer;
-	Parser						parser;
 	std::vector<std::string>	vec;
 	OpFactory					factory;
 
@@ -33,12 +39,26 @@ void	VirtualMachine::engine(std::istream & stream)
 	{
 		try
 		{
+			if (buff == ";;" && &stream == &std::cin)
+			{
+				exit(0);
+			}
+
+			comment(buff);
+
+			if (buff == "")
+			{
+				continue;
+			}
+
 			vec = lexer.explode(buff);
-			parser.operate(vec, _operands, factory);
+			parser.operate(vec.at(0))->execute(_operands, vec, factory);
 		}
 		catch (std::exception & e)
 		{
-			std::cout << e.what() << std::endl;
+			std::cerr << "Error: " << e.what() << "!\n";
 		}
 	}
+
+	std::cerr << "Error: no exit command found!" << std::endl;
 }

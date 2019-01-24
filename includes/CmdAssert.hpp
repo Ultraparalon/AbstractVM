@@ -13,9 +13,14 @@
 #pragma once
 
 #include "ICommand.hpp"
+#include "Typer.hpp"
+#include "Num.hpp"
 
 class CmdAssert : public ICommand
 {
+	Typer typer;
+	Num num;
+	
 public:
 	CmdAssert();
 	CmdAssert(CmdAssert const &);
@@ -25,23 +30,16 @@ public:
 
 	void	execute(std::stack<const IOperand *> &, std::vector<std::string> &, OpFactory &);
 
-	class EmptyStackException
+	class AssertException : public std::exception
 	{
-	public:
-		EmptyStackException() throw();
-		EmptyStackException(EmptyStackException const &) throw();
-		virtual ~EmptyStackException() throw();
-		virtual const char*	what() const throw();
-		EmptyStackException &	operator=(EmptyStackException const &) throw();
-	};
+		std::string err;
 
-	class NonEqualException
-	{
 	public:
-		NonEqualException() throw();
-		NonEqualException(NonEqualException const &) throw();
-		virtual ~NonEqualException() throw();
+		AssertException() throw();
+		AssertException(std::string const &) throw();
+		AssertException(AssertException const &) throw();
+		virtual ~AssertException() throw();
 		virtual const char*	what() const throw();
-		NonEqualException &	operator=(NonEqualException const &) throw();
+		AssertException &	operator=(AssertException const &) throw();
 	};
 };

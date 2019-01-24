@@ -1,37 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   CmdExit.hpp                                        :+:      :+:    :+:   */
+/*   CmdMax.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkaidans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/10 14:42:35 by vkaidans          #+#    #+#             */
-/*   Updated: 2019/01/10 14:42:37 by vkaidans         ###   ########.fr       */
+/*   Created: 2019/01/22 21:53:53 by vkaidans          #+#    #+#             */
+/*   Updated: 2019/01/22 21:53:55 by vkaidans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include "ICommand.hpp"
+#include "Poper.hpp"
 
-class CmdExit : public ICommand
+class CmdMax : public ICommand
 {
-public:
-	CmdExit();
-	CmdExit(CmdExit const &);
-	~CmdExit();
+	Poper poper;
 
-	CmdExit &	operator=(CmdExit const &);
+public:
+	CmdMax();
+	CmdMax(CmdMax const &);
+	~CmdMax();
+
+	CmdMax &	operator=(CmdMax const &);
 
 	void	execute(std::stack<const IOperand *> &, std::vector<std::string> &, OpFactory &);
 
-	class WrongSizeException : public std::exception
+	class MaxException : public std::exception
 	{
 	public:
-		WrongSizeException() throw();
-		WrongSizeException(WrongSizeException const &) throw();
-		virtual ~WrongSizeException() throw();
+		MaxException() throw();
+		MaxException(MaxException const &) throw();
+		virtual ~MaxException() throw();
 		virtual const char*	what() const throw();
-		WrongSizeException &	operator=(WrongSizeException const &) throw();
+		MaxException &	operator=(MaxException const &) throw();
 	};
 };

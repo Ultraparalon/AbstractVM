@@ -24,11 +24,19 @@ OpFactory &	OpFactory::operator=(OpFactory const &)
 
 IOperand const * OpFactory::createInt8(std::string const & val) const
 {
+	if (static_cast<char>(std::stoi(val)) != std::stoi(val))
+	{
+		throw OpFactory::OutOfRangeException();
+	}
 	return new Operand<char>(std::stoi(val), INT8, this);
 }
 
 IOperand const * OpFactory::createInt16(std::string const & val) const
 {
+	if (static_cast<short>(std::stoi(val)) != std::stoi(val))
+	{
+		throw OpFactory::OutOfRangeException();
+	}
 	return new Operand<short>(std::stoi(val), INT16, this);
 }
 
@@ -58,5 +66,22 @@ IOperand const *	OpFactory::createOperand(eOperandType type, std::string const &
 		case(DOUBLE):	return createDouble(val);	break;
 		default:		return NULL;
 	}
+}
+
+//OutOfRangeException---------------------------------------------------
+
+OpFactory::OutOfRangeException::OutOfRangeException() throw() {}
+OpFactory::OutOfRangeException::OutOfRangeException(OutOfRangeException const & obj) throw()
+{
+	*this = obj;
+}
+OpFactory::OutOfRangeException::~OutOfRangeException() throw() {}
+const char *	OpFactory::OutOfRangeException::what() const throw()
+{
+	return "Out of range.";
+}
+OpFactory::OutOfRangeException &	OpFactory::OutOfRangeException::operator=(OutOfRangeException const &) throw()
+{
+	return *this;
 }
 

@@ -24,27 +24,32 @@ CmdPush &	CmdPush::operator=(CmdPush const &)
 	return *this;
 }
 
-static eOperandType	typer(std::string & stype)
+void	CmdPush::execute(std::stack<const IOperand *> & oper,
+	std::vector<std::string> & vec, OpFactory & factory)
 {
-	if (stype == "int8")
-		return INT8;
-	else if (stype == "int16")
-		return INT16;
-	else if (stype == "int32")
-		return INT32;
-	else if (stype == "float")
-		return FLOAT;
-	else if (stype == "double")
-		return DOUBLE;
-	else
-		return DOUBLE;
-};
+	if (vec.size() != 3)
+	{
+		throw CmdPush::WrongSizeException();
+	}
 
-void	CmdPush::execute(std::stack<const IOperand *> & oper, std::vector<std::string> & vec, OpFactory & factory)
+	num.check(vec[2]);
+
+	oper.push(factory.createOperand(typer.get(vec.at(1)), vec.at(2)));
+}
+
+//WrongSizeException---------------------------------------------------
+
+CmdPush::WrongSizeException::WrongSizeException() throw() {}
+CmdPush::WrongSizeException::WrongSizeException(WrongSizeException const & obj) throw()
 {
-	(void)oper;
-	(void)vec;
-	(void)factory;
-
-	oper.push(factory.createOperand(typer(vec.at(1)), vec.at(2)));
+	*this = obj;
+}
+CmdPush::WrongSizeException::~WrongSizeException() throw() {}
+const char *	CmdPush::WrongSizeException::what() const throw()
+{
+	return "Wrong amount of arguments";
+}
+CmdPush::WrongSizeException &	CmdPush::WrongSizeException::operator=(WrongSizeException const &) throw()
+{
+	return *this;
 }

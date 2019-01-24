@@ -13,9 +13,12 @@
 #pragma once
 
 #include "ICommand.hpp"
+#include "Poper.hpp"
 
 class CmdPop : public ICommand
 {
+	Poper poper;
+
 public:
 	CmdPop();
 	CmdPop(CmdPop const &);
@@ -25,13 +28,13 @@ public:
 
 	void	execute(std::stack<const IOperand *> &, std::vector<std::string> &, OpFactory &);
 
-	class EmptyStackException
+	class PopException : public std::exception
 	{
 	public:
-		EmptyStackException() throw();
-		EmptyStackException(EmptyStackException const &) throw();
-		virtual ~EmptyStackException() throw();
+		PopException() throw();
+		PopException(PopException const &) throw();
+		virtual ~PopException() throw();
 		virtual const char*	what() const throw();
-		EmptyStackException &	operator=(EmptyStackException const &) throw();
+		PopException &	operator=(PopException const &) throw();
 	};
 };

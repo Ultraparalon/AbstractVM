@@ -20,11 +20,14 @@
 #include "Operand.hpp"
 #include "Lexer.hpp"
 #include "Parser.hpp"
+#include "IOperand.hpp"
 
 
 class VirtualMachine
 {
-	std::stack<const IOperand *>		_operands;
+	std::stack<const IOperand *> _operands;
+	Lexer lexer;
+	Parser parser;
 	
 public:
 	VirtualMachine();

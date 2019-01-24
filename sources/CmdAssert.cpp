@@ -24,83 +24,40 @@ CmdAssert &	CmdAssert::operator=(CmdAssert const &)
 	return *this;
 }
 
-static eOperandType	typer(std::string & stype)
+void	CmdAssert::execute(std::stack<const IOperand *> & oper,
+	std::vector<std::string> & vec, OpFactory &)
 {
-	if (stype == "int8")
-		return INT8;
-	else if (stype == "int16")
-		return INT16;
-	else if (stype == "int32")
-		return INT32;
-	else if (stype == "float")
-		return FLOAT;
-	else if (stype == "double")
-		return DOUBLE;
-	else
-		return DOUBLE;
-};
+	if (vec.size() != 3)
+		throw CmdAssert::AssertException("wrong amount of arguments");
 
-void	CmdAssert::execute(std::stack<const IOperand *> & oper, std::vector<std::string> & vec, OpFactory & factory)
-{
-	try
+	if (oper.empty())
 	{
-		if (oper.empty())
-			throw CmdAssert::EmptyStackException();
-
-		const IOperand * tmp = factory.createOperand(typer(vec.at(1)), vec.at(2));
-
-		if (tmp->getPrecision() != oper.top()->getPrecision())
-		{
-			delete tmp;
-			throw CmdAssert::NonEqualException();
-		}
-		if (tmp->toString() != oper.top()->toString())
-		{
-			delete tmp;
-			throw CmdAssert::NonEqualException();
-		}
-		delete tmp;
+		throw CmdAssert::AssertException("Empty stack");
 	}
-	catch (CmdAssert::EmptyStackException & e)
+
+	num.check(vec[2]);
+
+	if (typer.get(vec.at(1)) != oper.top()->getPrecision()
+		|| std::stod(vec.at(2)) != std::stod(oper.top()->toString()))
 	{
-		std::cout << "Error: " << e.what() << std::endl;
-	}
-	catch (CmdAssert::NonEqualException & e)
-	{
-		std::cout << "Error: " << e.what() << std::endl;
+		throw CmdAssert::AssertException("Non equal");
 	}
 }
 
-//EmptyStackException---------------------------------------------------
+//AssertException---------------------------------------------------
 
-CmdAssert::EmptyStackException::EmptyStackException() throw() {}
-CmdAssert::EmptyStackException::EmptyStackException(EmptyStackException const & obj) throw()
+CmdAssert::AssertException::AssertException() throw() : err("Error") {}
+CmdAssert::AssertException::AssertException(std::string const & str) throw() : err(str) {}
+CmdAssert::AssertException::AssertException(AssertException const & obj) throw()
 {
 	*this = obj;
 }
-CmdAssert::EmptyStackException::~EmptyStackException() throw() {}
-const char *	CmdAssert::EmptyStackException::what() const throw()
+CmdAssert::AssertException::~AssertException() throw() {}
+const char *	CmdAssert::AssertException::what() const throw()
 {
-	return "Not enough arguments.";
+	return err.c_str();
 }
-CmdAssert::EmptyStackException &	CmdAssert::EmptyStackException::operator=(EmptyStackException const &) throw()
-{
-	return *this;
-}
-
-//NonEqualException---------------------------------------------------
-
-CmdAssert::NonEqualException::NonEqualException() throw() {}
-CmdAssert::NonEqualException::NonEqualException(NonEqualException const & obj) throw()
-{
-	*this = obj;
-}
-CmdAssert::NonEqualException::~NonEqualException() throw() {}
-const char *	CmdAssert::NonEqualException::what() const throw()
-{
-	return "Assert failed.";
-}
-CmdAssert::NonEqualException &	CmdAssert::NonEqualException::operator=(NonEqualException const &) throw()
+CmdAssert::AssertException &	CmdAssert::AssertException::operator=(AssertException const &) throw()
 {
 	return *this;
 }

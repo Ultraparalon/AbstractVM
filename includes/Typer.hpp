@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   CmdSub.hpp                                         :+:      :+:    :+:   */
+/*   Typer.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkaidans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/10 14:38:52 by vkaidans          #+#    #+#             */
-/*   Updated: 2019/01/10 14:38:54 by vkaidans         ###   ########.fr       */
+/*   Created: 2019/01/22 16:33:37 by vkaidans          #+#    #+#             */
+/*   Updated: 2019/01/22 16:33:40 by vkaidans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "ICommand.hpp"
+#include "IOperand.hpp"
 
-class CmdSub : public ICommand
+class Typer
 {
 public:
-	CmdSub();
-	CmdSub(CmdSub const &);
-	~CmdSub();
+	Typer();
+	Typer(Typer const &);
+	~Typer();
 
-	CmdSub &	operator=(CmdSub const &);
+	Typer &	operator=(Typer const &);
 
-	void	execute(std::stack<const IOperand *> &, std::vector<std::string> &, OpFactory &);
+	eOperandType	get(std::string const &);
 
-	class EmptyStackException
+	class NonexistentTypeException : public std::exception
 	{
 	public:
-		EmptyStackException() throw();
-		EmptyStackException(EmptyStackException const &) throw();
-		virtual ~EmptyStackException() throw();
+		NonexistentTypeException() throw();
+		NonexistentTypeException(NonexistentTypeException const &) throw();
+		virtual ~NonexistentTypeException() throw();
 		virtual const char*	what() const throw();
-		EmptyStackException &	operator=(EmptyStackException const &) throw();
+		NonexistentTypeException &	operator=(NonexistentTypeException const &) throw();
 	};
 };

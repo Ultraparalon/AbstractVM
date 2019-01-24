@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   CmdDiv.hpp                                         :+:      :+:    :+:   */
+/*   Poper.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkaidans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/10 14:42:01 by vkaidans          #+#    #+#             */
-/*   Updated: 2019/01/10 14:42:03 by vkaidans         ###   ########.fr       */
+/*   Created: 2019/01/23 13:03:17 by vkaidans          #+#    #+#             */
+/*   Updated: 2019/01/23 13:03:19 by vkaidans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "ICommand.hpp"
+#include <stack>
+#include "IOperand.hpp"
 
-class CmdDiv : public ICommand
+class Poper
 {
 public:
-	CmdDiv();
-	CmdDiv(CmdDiv const &);
-	~CmdDiv();
+	Poper();
+	Poper(Poper const &);
+	~Poper();
 
-	CmdDiv &	operator=(CmdDiv const &);
+	Poper &	operator=(Poper const &);
 
-	void	execute(std::stack<const IOperand *> &, std::vector<std::string> &, OpFactory &);
+	IOperand const *	get(std::stack<IOperand const *> &, IOperand const *);
 
-	class EmptyStackException
+	class EmptyStackException : public std::exception
 	{
 	public:
 		EmptyStackException() throw();
@@ -33,15 +34,5 @@ public:
 		virtual ~EmptyStackException() throw();
 		virtual const char*	what() const throw();
 		EmptyStackException &	operator=(EmptyStackException const &) throw();
-	};
-
-	class ZeroDivideException
-	{
-	public:
-		ZeroDivideException() throw();
-		ZeroDivideException(ZeroDivideException const &) throw();
-		virtual ~ZeroDivideException() throw();
-		virtual const char*	what() const throw();
-		ZeroDivideException &	operator=(ZeroDivideException const &) throw();
-	};
+	};	
 };

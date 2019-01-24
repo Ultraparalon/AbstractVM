@@ -17,10 +17,9 @@ OBJ_DIR :=	./objects/
 INC_DIR :=	./includes/
 
 SRC =	main.cpp VirtualMachine.cpp OpFactory.cpp \
-		Lexer.cpp Parser.cpp \
+		Lexer.cpp Parser.cpp Typer.cpp Poper.cpp Num.cpp\
 		CmdPush.cpp CmdDump.cpp CmdPop.cpp CmdAssert.cpp CmdPrint.cpp \
-		CmdAdd.cpp CmdSub.cpp CmdDiv.cpp CmdMul.cpp CmdMod.cpp \
-		CmdExit.cpp
+		CmdMath.cpp CmdMax.cpp CmdMin.cpp CmdExit.cpp
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 

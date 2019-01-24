@@ -25,23 +25,16 @@ public:
 
 	void	execute(std::stack<const IOperand *> &, std::vector<std::string> &, OpFactory &);
 
-	class EmptyStackException
+	class PrintException : public std::exception
 	{
-	public:
-		EmptyStackException() throw();
-		EmptyStackException(EmptyStackException const &) throw();
-		virtual ~EmptyStackException() throw();
-		virtual const char*	what() const throw();
-		EmptyStackException &	operator=(EmptyStackException const &) throw();
-	};
+		std::string err;
 
-	class WrongTypeException
-	{
 	public:
-		WrongTypeException() throw();
-		WrongTypeException(WrongTypeException const &) throw();
-		virtual ~WrongTypeException() throw();
+		PrintException() throw();
+		PrintException(std::string) throw();
+		PrintException(PrintException const &) throw();
+		virtual ~PrintException() throw();
 		virtual const char*	what() const throw();
-		WrongTypeException &	operator=(WrongTypeException const &) throw();
+		PrintException &	operator=(PrintException const &) throw();
 	};
 };

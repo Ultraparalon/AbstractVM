@@ -24,4 +24,14 @@ public:
 	CmdDump &	operator=(CmdDump const &);
 
 	void	execute(std::stack<const IOperand *> &, std::vector<std::string> &, OpFactory &);
+
+	class WrongSizeException : public std::exception
+	{
+	public:
+		WrongSizeException() throw();
+		WrongSizeException(WrongSizeException const &) throw();
+		virtual ~WrongSizeException() throw();
+		virtual const char*	what() const throw();
+		WrongSizeException &	operator=(WrongSizeException const &) throw();
+	};
 };
