@@ -25,7 +25,7 @@ CmdMin &	CmdMin::operator=(CmdMin const &)
 }
 
 void	CmdMin::execute(std::stack<const IOperand *> & oper,
-	std::vector<std::string> & vec, OpFactory &)
+	std::vector<std::string> & vec, OpFactory &) // command take two operand and return little one
 {
 	if (vec.size() != 1)
 		throw CmdMin::MaxException();

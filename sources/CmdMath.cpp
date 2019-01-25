@@ -25,7 +25,7 @@ CmdMath &	CmdMath::operator=(CmdMath const &)
 }
 
 void	CmdMath::execute(std::stack<const IOperand *> & oper,
-	std::vector<std::string> & vec, OpFactory &)
+	std::vector<std::string> & vec, OpFactory &) // command that makes math operations
 {
 	if (vec.size() != 1)
 		throw CmdMath::MathException("Wrong amount of arguments");

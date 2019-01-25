@@ -21,7 +21,7 @@ Typer &	Typer::operator=(Typer const &)
 	return *this;
 }
 
-eOperandType	Typer::get(std::string const & stype)
+eOperandType	Typer::get(std::string const & stype) // return type of operand
 {
 	if (stype == "int8")
 		return INT8;

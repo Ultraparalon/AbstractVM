@@ -16,7 +16,7 @@ Lexer::Lexer() {}
 Lexer::Lexer(Lexer const & obj)	{	*this = obj;	}
 Lexer::~Lexer() {}
 
-std::vector<std::string>	Lexer::explode(std::string const & str)
+std::vector<std::string>	Lexer::explode(std::string const & str) // divide string to vector<string>
 {
 	std::string buff;
 	std::vector<std::string> vec;

@@ -18,7 +18,7 @@ int	main(int argc, char ** argv)
 {
 	VirtualMachine vm;
 
-	if (argc == 2)
+	if (argc == 2) // check from where to take output
 	{
 		std::ifstream	file(argv[1]);
 		
@@ -36,6 +36,5 @@ int	main(int argc, char ** argv)
 		vm.engine(std::cin);
 	}
 
-	// system("leaks avm");
 	return (0);
 }

@@ -22,7 +22,7 @@ Poper &	Poper::operator=(Poper const &)
 }
 
 IOperand const *	Poper::get(std::stack<IOperand const *> & oper,
-	IOperand const * tmp)
+	IOperand const * tmp) // gets operand from the stack
 {
 	if (oper.empty())
 	{

@@ -25,7 +25,7 @@ CmdPop &	CmdPop::operator=(CmdPop const &)
 }
 
 void	CmdPop::execute(std::stack<const IOperand *> & oper,
-	std::vector<std::string> & vec, OpFactory &)
+	std::vector<std::string> & vec, OpFactory &) // command pop out last operand
 {
 	if (vec.size() != 1)
 		throw PopException();

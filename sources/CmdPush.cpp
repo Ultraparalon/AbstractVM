@@ -25,7 +25,7 @@ CmdPush &	CmdPush::operator=(CmdPush const &)
 }
 
 void	CmdPush::execute(std::stack<const IOperand *> & oper,
-	std::vector<std::string> & vec, OpFactory & factory)
+	std::vector<std::string> & vec, OpFactory & factory) // command that pushes new operands
 {
 	if (vec.size() != 3)
 	{

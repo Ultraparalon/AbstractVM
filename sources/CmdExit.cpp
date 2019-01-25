@@ -25,7 +25,7 @@ CmdExit &	CmdExit::operator=(CmdExit const &)
 }
 
 void	CmdExit::execute(std::stack<const IOperand *> &,
-	std::vector<std::string> & vec, OpFactory &)
+	std::vector<std::string> & vec, OpFactory &) // exit command
 {
 	if (vec.size() != 1)
 		throw CmdExit::WrongSizeException();

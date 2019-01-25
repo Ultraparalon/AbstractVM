@@ -12,7 +12,7 @@
 
 #include "Parser.hpp"
 
-Parser::Parser()
+Parser::Parser() // filling map with commands
 {
 	_commands["push"] = new CmdPush;
 	_commands["pop"] = new CmdPop;
@@ -34,11 +34,7 @@ Parser::~Parser()
 	for (std::map<std::string, ICommand *>::iterator it = _commands.begin();
 			it != _commands.end(); it++)
 	{
-		if (it->second)
-		{
-			delete it->second;
-			it->second = NULL;
-		}
+		delete it->second;
 	}
 }
 
@@ -47,7 +43,7 @@ Parser &	Parser::operator=(Parser const &)
 	return *this;
 }
 
-ICommand *	Parser::operate(std::string const & cmd)
+ICommand *	Parser::operate(std::string const & cmd) // returning command from map
 {
 	return _commands.at(cmd);
 }

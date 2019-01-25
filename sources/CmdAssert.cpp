@@ -25,7 +25,7 @@ CmdAssert &	CmdAssert::operator=(CmdAssert const &)
 }
 
 void	CmdAssert::execute(std::stack<const IOperand *> & oper,
-	std::vector<std::string> & vec, OpFactory &)
+	std::vector<std::string> & vec, OpFactory &) // command that checks if operands are equal, otherwise throws error
 {
 	if (vec.size() != 3)
 		throw CmdAssert::AssertException("wrong amount of arguments");

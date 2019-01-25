@@ -39,22 +39,22 @@ void	VirtualMachine::engine(std::istream & stream)
 	{
 		try
 		{
-			if (buff == ";;" && &stream == &std::cin)
+			if (buff == ";;" && &stream == &std::cin) // quiting with special command from stdin
 			{
 				exit(0);
 			}
 
-			comment(buff);
+			comment(buff); // inognore comments
 
-			if (buff == "")
+			if (buff == "") // skip iteration if line is empty
 			{
 				continue;
 			}
 
-			vec = lexer.explode(buff);
-			parser.operate(vec.at(0))->execute(_operands, vec, factory);
+			vec = lexer.explode(buff); // divide line to vector
+			parser.operate(vec.at(0))->execute(_operands, vec, factory); // get needed command, and execute it
 		}
-		catch (std::exception & e)
+		catch (std::exception & e) // catching most of the errors
 		{
 			std::cerr << "Error: " << e.what() << "!\n";
 		}

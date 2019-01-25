@@ -25,7 +25,7 @@ CmdDump &	CmdDump::operator=(CmdDump const &)
 }
 
 void	CmdDump::execute(std::stack<const IOperand *> & oper,
-	std::vector<std::string> & vec, OpFactory &)
+	std::vector<std::string> & vec, OpFactory &) // command that shows current operands in the stack
 {
 	std::stack<const IOperand *> st = oper;
 

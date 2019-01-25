@@ -25,7 +25,7 @@ CmdPrint &	CmdPrint::operator=(CmdPrint const &)
 }
 
 void	CmdPrint::execute(std::stack<const IOperand *> & oper,
-	std::vector<std::string> & vec, OpFactory &)
+	std::vector<std::string> & vec, OpFactory &) // if last operand if int8, command print it like a char symbol
 {
 	if (vec.size() != 1)
 	{

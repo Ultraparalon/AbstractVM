@@ -55,7 +55,7 @@ IOperand const * OpFactory::createDouble(std::string const & val) const
 	return new Operand<double>(std::stod(val), DOUBLE, this);
 }
 
-IOperand const *	OpFactory::createOperand(eOperandType type, std::string const & val) const
+IOperand const *	OpFactory::createOperand(eOperandType type, std::string const & val) const // factory that makes new operands
 {
 	switch (type)
 	{

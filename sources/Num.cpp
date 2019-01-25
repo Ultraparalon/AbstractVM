@@ -21,7 +21,7 @@ Num &	Num::operator=(Num const &)
 	return *this;
 }
 
-void	Num::check(std::string const & str)
+void	Num::check(std::string const & str) // checks if string made of 0-9 . - symbols
 {
 	for (auto c:str)
 	{

@@ -25,7 +25,7 @@ CmdMax &	CmdMax::operator=(CmdMax const &)
 }
 
 void	CmdMax::execute(std::stack<const IOperand *> & oper,
-	std::vector<std::string> & vec, OpFactory &)
+	std::vector<std::string> & vec, OpFactory &) // command takes two operands and return bigger one
 {
 	if (vec.size() != 1)
 		throw CmdMax::MaxException();
