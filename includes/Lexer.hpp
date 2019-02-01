@@ -18,12 +18,5 @@
 class Lexer
 {
 public:
-	Lexer();
-	Lexer(Lexer const &);
-	~Lexer();
-
-	std::vector<std::string>	explode(std::string const &);
-
-	Lexer &	operator=(Lexer const &);
-	
+	std::vector<std::string>	explode(std::string const &);	
 };

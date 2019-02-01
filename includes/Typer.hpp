@@ -17,21 +17,11 @@
 class Typer
 {
 public:
-	Typer();
-	Typer(Typer const &);
-	~Typer();
-
-	Typer &	operator=(Typer const &);
-
 	eOperandType	get(std::string const &);
 
 	class NonexistentTypeException : public std::exception
 	{
 	public:
-		NonexistentTypeException() throw();
-		NonexistentTypeException(NonexistentTypeException const &) throw();
-		virtual ~NonexistentTypeException() throw();
 		virtual const char*	what() const throw();
-		NonexistentTypeException &	operator=(NonexistentTypeException const &) throw();
 	};
 };

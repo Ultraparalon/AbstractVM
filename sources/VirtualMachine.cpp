@@ -16,8 +16,9 @@ VirtualMachine::VirtualMachine() {}
 VirtualMachine::VirtualMachine(VirtualMachine const & obj)	{	*this = obj;	}
 VirtualMachine::~VirtualMachine() {}
 
-VirtualMachine &	VirtualMachine::operator=(VirtualMachine const &)
+VirtualMachine &	VirtualMachine::operator=(VirtualMachine const & obj)
 {
+	operands = obj.operands;
 	return *this;
 }
 
@@ -52,7 +53,7 @@ void	VirtualMachine::engine(std::istream & stream)
 			}
 
 			vec = lexer.explode(buff); // divide line to vector
-			parser.operate(vec.at(0))->execute(_operands, vec, factory); // get needed command, and execute it
+			parser.operate(vec.at(0))->execute(operands, vec, factory); // get needed command, and execute it
 		}
 		catch (std::exception & e) // catching most of the errors
 		{

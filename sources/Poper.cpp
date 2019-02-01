@@ -12,15 +12,6 @@
 
 #include "Poper.hpp"
 
-Poper::Poper() {}
-Poper::Poper(Poper const & obj) {	*this = obj;	}
-Poper::~Poper() {}
-
-Poper &	Poper::operator=(Poper const &)
-{
-	return *this;
-}
-
 IOperand const *	Poper::get(std::stack<IOperand const *> & oper,
 	IOperand const * tmp) // gets operand from the stack
 {
@@ -37,17 +28,7 @@ IOperand const *	Poper::get(std::stack<IOperand const *> & oper,
 
 //EmptyStackException---------------------------------------------------
 
-Poper::EmptyStackException::EmptyStackException() throw() {}
-Poper::EmptyStackException::EmptyStackException(EmptyStackException const & obj) throw()
-{
-	*this = obj;
-}
-Poper::EmptyStackException::~EmptyStackException() throw() {}
 const char *	Poper::EmptyStackException::what() const throw()
 {
 	return "Empty stack";
-}
-Poper::EmptyStackException &	Poper::EmptyStackException::operator=(EmptyStackException const &) throw()
-{
-	return *this;
 }

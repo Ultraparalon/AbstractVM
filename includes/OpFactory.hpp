@@ -23,22 +23,12 @@ class OpFactory
 	IOperand const * createDouble(std::string const &) const;
 
 public:
-	OpFactory(void);
-	OpFactory(OpFactory const &);
-	~OpFactory();
 
 	IOperand const *	createOperand(eOperandType, std::string const &) const;
-
-	OpFactory &	operator=(OpFactory const &);
 
 	class OutOfRangeException : public std::exception
 	{
 	public:
-		OutOfRangeException() throw();
-		OutOfRangeException(OutOfRangeException const &) throw();
-		virtual ~OutOfRangeException() throw();
 		virtual const char*	what() const throw();
-		OutOfRangeException &	operator=(OutOfRangeException const &) throw();
-	};
-	
+	};	
 };

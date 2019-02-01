@@ -13,15 +13,6 @@
 #include "OpFactory.hpp"
 #include "Operand.hpp"
 
-OpFactory::OpFactory() {}
-OpFactory::OpFactory(OpFactory const & obj) { *this = obj;	}
-OpFactory::~OpFactory() {}
-
-OpFactory &	OpFactory::operator=(OpFactory const &)
-{
-	return *this;
-}
-
 IOperand const * OpFactory::createInt8(std::string const & val) const
 {
 	if (static_cast<char>(std::stoi(val)) != std::stoi(val))
@@ -70,18 +61,7 @@ IOperand const *	OpFactory::createOperand(eOperandType type, std::string const &
 
 //OutOfRangeException---------------------------------------------------
 
-OpFactory::OutOfRangeException::OutOfRangeException() throw() {}
-OpFactory::OutOfRangeException::OutOfRangeException(OutOfRangeException const & obj) throw()
-{
-	*this = obj;
-}
-OpFactory::OutOfRangeException::~OutOfRangeException() throw() {}
 const char *	OpFactory::OutOfRangeException::what() const throw()
 {
 	return "Out of range.";
 }
-OpFactory::OutOfRangeException &	OpFactory::OutOfRangeException::operator=(OutOfRangeException const &) throw()
-{
-	return *this;
-}
-

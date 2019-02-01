@@ -12,10 +12,6 @@
 
 #include "Lexer.hpp"
 
-Lexer::Lexer() {}
-Lexer::Lexer(Lexer const & obj)	{	*this = obj;	}
-Lexer::~Lexer() {}
-
 std::vector<std::string>	Lexer::explode(std::string const & str) // divide string to vector<string>
 {
 	std::string buff;
@@ -35,9 +31,4 @@ std::vector<std::string>	Lexer::explode(std::string const & str) // divide strin
 		vec.push_back(buff);
 
 	return vec;
-}
-
-Lexer &	Lexer::operator=(Lexer const &)
-{
-	return *this;
 }

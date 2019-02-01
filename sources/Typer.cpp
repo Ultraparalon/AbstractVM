@@ -12,15 +12,6 @@
 
 #include "Typer.hpp"
 
-Typer::Typer() {}
-Typer::Typer(Typer const & obj) {	*this = obj;	}
-Typer::~Typer() {}
-
-Typer &	Typer::operator=(Typer const &)
-{
-	return *this;
-}
-
 eOperandType	Typer::get(std::string const & stype) // return type of operand
 {
 	if (stype == "int8")
@@ -39,17 +30,7 @@ eOperandType	Typer::get(std::string const & stype) // return type of operand
 
 //NonexistentTypeException---------------------------------------------------
 
-Typer::NonexistentTypeException::NonexistentTypeException() throw() {}
-Typer::NonexistentTypeException::NonexistentTypeException(NonexistentTypeException const & obj) throw()
-{
-	*this = obj;
-}
-Typer::NonexistentTypeException::~NonexistentTypeException() throw() {}
 const char *	Typer::NonexistentTypeException::what() const throw()
 {
 	return "Wrong type.";
-}
-Typer::NonexistentTypeException &	Typer::NonexistentTypeException::operator=(NonexistentTypeException const &) throw()
-{
-	return *this;
 }

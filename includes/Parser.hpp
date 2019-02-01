@@ -15,15 +15,7 @@
 #include <iostream>
 #include <map>
 #include "ICommand.hpp"
-#include "CmdPush.hpp"
-#include "CmdPop.hpp"
-#include "CmdDump.hpp"
-#include "CmdAssert.hpp"
-#include "CmdPrint.hpp"
-#include "CmdExit.hpp"
-#include "CmdMath.hpp"
-#include "CmdMax.hpp"
-#include "CmdMin.hpp"
+#include "Commands.hpp"
 
 class Parser
 {

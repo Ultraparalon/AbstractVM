@@ -17,21 +17,11 @@
 class Num
 {
 public:
-	Num();
-	Num(Num const &);
-	~Num();
-
-	Num &	operator=(Num const &);
-
 	void	check(std::string const &);
 
 	class NumException : public std::exception
 	{
 	public:
-		NumException() throw();
-		NumException(NumException const &) throw();
-		virtual ~NumException() throw();
 		virtual const char*	what() const throw();
-		NumException &	operator=(NumException const &) throw();
 	};	
 };

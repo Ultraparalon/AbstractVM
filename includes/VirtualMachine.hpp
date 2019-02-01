@@ -25,7 +25,7 @@
 
 class VirtualMachine
 {
-	std::stack<const IOperand *> _operands;
+	std::stack<const IOperand *> operands;
 	Lexer lexer;
 	Parser parser;
 	

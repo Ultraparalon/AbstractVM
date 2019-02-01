@@ -18,21 +18,11 @@
 class Poper
 {
 public:
-	Poper();
-	Poper(Poper const &);
-	~Poper();
-
-	Poper &	operator=(Poper const &);
-
 	IOperand const *	get(std::stack<IOperand const *> &, IOperand const *);
 
 	class EmptyStackException : public std::exception
 	{
 	public:
-		EmptyStackException() throw();
-		EmptyStackException(EmptyStackException const &) throw();
-		virtual ~EmptyStackException() throw();
 		virtual const char*	what() const throw();
-		EmptyStackException &	operator=(EmptyStackException const &) throw();
 	};	
 };

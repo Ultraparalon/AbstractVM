@@ -18,8 +18,7 @@ INC_DIR :=	./includes/
 
 SRC =	main.cpp VirtualMachine.cpp OpFactory.cpp \
 		Lexer.cpp Parser.cpp Typer.cpp Poper.cpp Num.cpp\
-		CmdPush.cpp CmdDump.cpp CmdPop.cpp CmdAssert.cpp CmdPrint.cpp \
-		CmdMath.cpp CmdMax.cpp CmdMin.cpp CmdExit.cpp
+		Commands.cpp
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 
